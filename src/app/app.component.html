@@ -3,6 +3,22 @@
     Welcome to {{title}}!
   </h1>
 </div>
+
+<div *ngIf="afAuth.authState | async; let user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <button (click)="login()">Login with Google</button>
+</ng-template>
+
+<ul>
+  <li *ngFor="let item of items | async">
+     {{ item | json }}
+  </li>
+</ul>
+
 <router-outlet></router-outlet>
 <pre>{{ dogs | json}}</pre>
 
